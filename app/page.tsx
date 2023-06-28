@@ -1,18 +1,18 @@
 
 'use client';
 import { useState } from 'react';
-import Countdown from './countdown';
-import Word from './word';
+import Countdown from './components/countdown';
+import Word from './components/word';
 
 export default function Home() {
 
-  const [hour, set_hour] = useState(0)
+  const [hour, set_hour] = useState(new Date().getHours())
   setInterval(()=>{
-    set_hour(new Date().getHours())
+    if (hour != new Date().getHours()){
+      set_hour(new Date().getHours())
+    }
   },1000)
-
   
-
   return (
     <main>
       {hour < 9 ? <Countdown />: <Word />}  

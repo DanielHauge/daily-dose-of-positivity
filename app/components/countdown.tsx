@@ -2,20 +2,21 @@
 import { useState } from 'react';
 
 function padLeft(text:string, padChar:string, size:number): string {
-    return (String(padChar).repeat(size) + text).substring( (size * -1), size) ;
+    return (String(padChar).repeat(size) + text).substr( (size * -1), size) ;
 }
 
 
 export default function Countdown() {
     const now = new Date()
-    const reveal = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18, 0, 0, 0)
+    const reveal = new Date(now.getFullYear(), now.getMonth(),  now.getHours() >= 9 ? now.getDate() + 1 : now.getDate() , 9, 0, 0, 0)
     const [time_left, set_time_left]=useState('')
     setInterval(()=>{
         const remaining = reveal.getTime() - new Date().getTime()
         const hours = padLeft(String(Math.floor(remaining / (1000 * 60 * 60))), '0', 2)
         const minutes = padLeft(String(Math.floor((remaining / (1000 * 60)) % 60)), '0', 2)
         const seconds = padLeft(String(Math.floor((remaining / 1000) % 60)), '0', 2)
-        set_time_left(hours + ":" + minutes + ":" + seconds)
+        const time_left = hours + ':' + minutes + ':' + seconds
+        set_time_left(time_left)
     }, 1000)
 
   return (
