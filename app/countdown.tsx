@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 function padLeft(text:string, padChar:string, size:number): string {
-    return (String(padChar).repeat(size) + text).substr( (size * -1), size) ;
+    return (String(padChar).repeat(size) + text).substring( (size * -1), size) ;
 }
 
 
